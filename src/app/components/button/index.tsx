@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import tw from "twin.macro";
 
 interface IButtonProps {
@@ -27,26 +27,31 @@ const BaseButton = styled.button`
     duration-200
     ease-in-out
     m-1
+    w-36
   `};
 `;
 
 const OutlinedButton = styled(BaseButton)`
   ${tw`
     bg-red-500
-    hover:bg-transparent
-    hover:text-red-500
-    hover:border-red-500
   `};
+  &:hover {
+    background-color: transparent;
+    border-color: rgb(239, 68, 68, 1);
+    color: rgb(239, 68, 68, 1);
+  }
 `;
 
 const FilledButton = styled(BaseButton)`
+  &:hover {
+    background-color: rgb(239, 68, 68, 1);
+    border-color: transparent;
+    color: white;
+  }
   ${tw`
     border-red-500
     text-red-500
     bg-transparent
-    hover:bg-red-500
-    hover:text-white
-    hover:border-transparent
   `};
 `;
 

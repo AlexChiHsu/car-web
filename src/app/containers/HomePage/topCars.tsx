@@ -1,9 +1,14 @@
 import { createSelector } from "@reduxjs/toolkit";
-import React, { Dispatch } from "react";
+import React, { Dispatch, useState } from "react";
 import { styled } from "styled-components";
 import tw from "twin.macro";
 import Car from "../../components/car";
 import { ICar } from "../../../typings/car";
+import "@brainhubeu/react-carousel/lib/style.css";
+import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
+import { useSelector, useDispatch } from "react-redux";
+import { useMediaQuery } from "react-responsive";
+import { SCREENS } from "../../components/responsive";
 
 const TopCarsContainer = styled.div`
   ${tw`
@@ -75,6 +80,13 @@ const LoadingContainer = styled.div`
 const wait = (timeout: number) => new Promise((rs) => setTimeout(rs, timeout));
 
 export default function TopCars() {
+  const [current, setCurrent] = useState(0);
+  const [isLoading, setLoading] = useState(false);
+
+  const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
+
+  // const { topCars } = useSelector(stateSelector);
+  // const { setTopCars } = actionDispatch(useDispatch());
   const testCar: ICar = {
     name: "Audi S3 Car",
     mileage: "10k",
@@ -87,7 +99,7 @@ export default function TopCars() {
   };
 
   const testCar2: ICar = {
-    name: "HONDA cITY 5 Seater Car",
+    name: "HONDA CITY 5 Seater Car",
     mileage: "20k",
     thumbnailSrc:
       "https://shinewiki.com/wp-content/uploads/2019/11/honda-city.jpg",
@@ -97,14 +109,62 @@ export default function TopCars() {
     gas: "Petrol",
   };
 
+  const cars = [
+    <Car {...testCar2} />,
+    <Car {...testCar} />,
+    <Car {...testCar2} />,
+    <Car {...testCar} />,
+    <Car {...testCar2} />,
+  ];
+
+  const numberOfDots = isMobile ? cars.length : Math.ceil(cars.length / 3);
+
   return (
     <TopCarsContainer>
       <Title>Explore Our Top Deals</Title>
 
       <CarsContainer>
-        <Car {...testCar} />
-        <Car {...testCar} />
-        <Car {...testCar2} />
+        <Carousel
+          value={current}
+          onChange={setCurrent}
+          slides={cars}
+          plugins={[
+            "clickToChange",
+            {
+              resolve: slidesToShowPlugin,
+              options: {
+                numberOfSlides: 3,
+              },
+            },
+          ]}
+          breakpoints={{
+            640: {
+              plugins: [
+                {
+                  resolve: slidesToShowPlugin,
+                  options: {
+                    numberOfSlides: 1,
+                  },
+                },
+              ],
+            },
+            900: {
+              plugins: [
+                {
+                  resolve: slidesToShowPlugin,
+                  options: {
+                    numberOfSlides: 2,
+                  },
+                },
+              ],
+            },
+          }}
+        />
+        <Dots
+          value={current}
+          onChange={setCurrent}
+          number={numberOfDots}
+        ></Dots>
       </CarsContainer>
     </TopCarsContainer>
   );

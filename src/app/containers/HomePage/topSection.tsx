@@ -8,6 +8,7 @@ import Button from "../../components/button";
 
 const TopSectionContainer = styled.div`
   min-height: 400px;
+  margin-top: 6em;
   ${tw`
     w-full
     max-w-screen-2xl
@@ -17,8 +18,7 @@ const TopSectionContainer = styled.div`
     pr-3
     lg:pl-12
     lg:pr-12
-
-  `}
+  `};
 `;
 
 const LeftContainer = styled.div`
@@ -26,8 +26,9 @@ const LeftContainer = styled.div`
     w-1/2
     flex
     flex-col
-  `}
+  `};
 `;
+
 const RightContainer = styled.div`
   ${tw`
     w-1/2
@@ -35,24 +36,24 @@ const RightContainer = styled.div`
     flex-col
     relative
     mt-20
-  `}
+  `};
 `;
 
 const Slogan = styled.h1`
   ${tw`
-  font-bold
-  text-2xl
-  xl:text-6xl
-  sm:text-3xl
-  md:text-5xl
-  lg:font-black
-  md:font-extrabold
-  text-black
-  mb-4
-  sm:leading-snug
-  lg:leading-normal
-  xl:leading-relaxed
-  `}
+    font-bold
+    text-2xl
+    xl:text-6xl
+    sm:text-3xl
+    md:text-5xl
+    lg:font-black
+    md:font-extrabold
+    text-black
+    mb-4
+    sm:leading-snug
+    lg:leading-normal
+    xl:leading-relaxed
+  `};
 `;
 
 const Description = styled.p`
@@ -64,7 +65,7 @@ const Description = styled.p`
     overflow-hidden
     max-h-12
     text-gray-800
-  `}
+  `};
 `;
 
 const BlobContainer = styled.div`
@@ -127,7 +128,7 @@ const StandaloneCar = styled.div`
   }
 
   @media (min-width: ${SCREENS.lg}) {
-    height: 21;
+    height: 21em;
     right: -8em;
     top: -5em;
   }
@@ -144,7 +145,7 @@ const ButtonsContainer = styled.div`
     flex
     flex-wrap
     mt-4
-  `}
+  `};
 `;
 
 export default function TopSection() {
