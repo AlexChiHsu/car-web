@@ -1,4 +1,3 @@
-import { ICar } from "../../../typings/car";
 import { apolloClient } from "../../graphql";
 import { GET_ALL_CARS } from "./queries";
 
@@ -19,29 +18,3 @@ class CarService {
 }
 
 export default new CarService();
-
-/* 
-export const fetchProductWelab = createAsyncThunk(
-  'products/welab/info',
-  async (productCode: string, { dispatch }) => {
-    const response = callGraphyql<ProductByResellerAndSkuResponse>({
-      url: store
-        .getState()
-        .product.globalConfigParam.get('frontend.welab.graphql.url'),
-      query: GET_PRODUCT,
-      variables: {
-        resellerName: store
-          .getState()
-          .product.globalConfigParam.get(
-            'frontend.welab.graphql.merchantidentifier',
-          ),
-        sku: productCode,
-      },
-      // fea-2030 && fea-2012 don't display error
-      // setError: (error: AxiosError) => dispatch(setError(error)),
-    });
-
-    return response;
-  },
-);
-*/
