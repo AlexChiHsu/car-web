@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import React, { Dispatch, useState } from "react";
+import React, { Dispatch, useEffect, useState } from "react";
 import { styled } from "styled-components";
 import tw from "twin.macro";
 import Car from "../../components/car";
@@ -9,6 +9,9 @@ import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import { useSelector, useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../../components/responsive";
+import carService from "../../services/carService";
+import { useQuery } from "@apollo/client";
+import { GET_ALL_CARS } from "../../services/carService/queries";
 
 const TopCarsContainer = styled.div`
   ${tw`
@@ -84,7 +87,7 @@ export default function TopCars() {
   const [isLoading, setLoading] = useState(false);
 
   const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
-
+  const { loading, error, data } = useQuery(GET_ALL_CARS);
   // const { topCars } = useSelector(stateSelector);
   // const { setTopCars } = actionDispatch(useDispatch());
   const testCar: ICar = {
@@ -119,6 +122,7 @@ export default function TopCars() {
 
   const numberOfDots = isMobile ? cars.length : Math.ceil(cars.length / 3);
 
+  console.log(data, loading, error);
   return (
     <TopCarsContainer>
       <Title>Explore Our Top Deals</Title>

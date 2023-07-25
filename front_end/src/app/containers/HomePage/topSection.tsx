@@ -7,7 +7,7 @@ import { SCREENS } from "../../components/responsive";
 import Button from "../../components/button";
 
 const TopSectionContainer = styled.div`
-  min-height: 400px;
+  min-height: 450px;
   margin-top: 6em;
   ${tw`
     w-full
