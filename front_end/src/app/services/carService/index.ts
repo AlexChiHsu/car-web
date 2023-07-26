@@ -1,3 +1,4 @@
+import { ICar } from "../../../typings/car";
 import { apolloClient } from "../../graphql";
 import { GET_ALL_CARS } from "./queries";
 
@@ -9,8 +10,8 @@ class CarService {
         throw err;
       });
 
-    if (response && response.data) {
-      return response.data;
+    if (response && response.data && response.data.cars) {
+      return response.data.cars as ICar[];
     }
 
     return [];
